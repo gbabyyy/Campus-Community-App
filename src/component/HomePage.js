@@ -12,6 +12,8 @@ const HomePage = () => {
   const handleSubmit = () => {
     navigate('/levels');
   }
+  const savedName = sessionStorage.getItem('userName');
+  console.log(savedName, 'name')
   return (
     <>
       <div className="header" style={{padding: '30px'}}>
@@ -22,7 +24,7 @@ const HomePage = () => {
         </div>
         <div className="task-header">
           <span className='home-level'> Hello </span>
-          <span style={{color: 'white', fontWeight: 'bold'}}> Geemol Baby</span>
+          <span style={{color: 'white', fontWeight: 'bold'}}>{savedName}</span>
         </div>
       </div>
       <div className="levels-page mt-5">
@@ -41,18 +43,18 @@ const HomePage = () => {
           <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between' }}>
             <button className="round-button" style={{ width: '100px', height: '100px', backgroundColor: 'white', padding: '10px', border: 'none', cursor: 'pointer', marginRight: '10px', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', borderRadius: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <img src={frame} alt="Left Image" style={{ width: '50px', height: '50px', marginBottom: '5px' }} />
-              <span style={{ color: 'black', textAlign: 'center' }}>Hint</span>
+              <span style={{ color: 'black', textAlign: 'center' }}><a  style={{ color: 'black', textAlign: 'center' }} href="/hint">Hint</a></span>
             </button>
             <button className="square-button" style={{ width: '100px', height: '100px', backgroundColor: 'white', padding: '10px', border: 'none', cursor: 'pointer', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', borderRadius: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <img src={frametrophy} alt="Right Image" style={{ width: '50px', height: '50px', marginBottom: '5px' }} />
-              <span style={{ color: 'black', textAlign: 'center' }}>Status</span>
+              <span style={{ color: 'black', textAlign: 'center' }}> <a  style={{ color: 'black', textAlign: 'center' }} href="/status">Status</a></span>
             </button>
           </div>
 
         </div>
       </div>
       <div className="footer">
-        <h3 className="footer-heading">Copy@ 2024 fleming.com, All Right Reserved</h3>
+        <h3 className="footer-heading">Copy@ 2024 fleming.ca, All Right Reserved</h3>
       </div>
     </>
   );

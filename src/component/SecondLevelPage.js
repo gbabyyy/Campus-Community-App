@@ -82,7 +82,7 @@ const SecondLevelPage = () => {
             </div>
             {/* Footer Section Start Here! */}
             <div className="footer">
-                <h3 className="footer-heading">Copy@ 2024 fleming.com, All Right Reserved</h3>
+                <h3 className="footer-heading">Copy@ 2024 fleming.ca, All Right Reserved</h3>
             </div>
         </>
     );
