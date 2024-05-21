@@ -58,11 +58,8 @@ const GameListPage = () => {
                     </div>
                     <div className="home-level">
                         <span>Home</span> |
-                        <span className="level-heading">Levels</span>
+                        <span className="level-heading">Task</span>
                     </div>
-                </div>
-                <div className="task-header">
-                    <h2>TASK COMPLETED</h2>
                 </div>
             </div>
             {/* Level Section Start Here! */}
