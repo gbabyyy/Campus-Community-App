@@ -16,64 +16,29 @@ function LoginPage() {
 
   const handleUsernameChange = (e) => {
     setEmail(e.target.value);
-    setEmailError(''); 
-    setApiError(''); 
+    setEmailError('');
+    setApiError('');
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-    setPasswordError(''); 
+    setPasswordError('');
     setApiError('');
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   if (email.trim() === '') {
-  //     setEmailError('Please enter your email.');
-  //     return;
-  //   }
-
-  //   if (password.trim() === '') {
-  //     setPasswordError('Please enter your password.');
-  //     return;
-  //   }
-
-  //   // Sending the form data as JSON string
-  //   axios.post('https://api-flrming.dhoomaworksbench.site/api/student/user-login/', {
-  //     password: password,
-  //     email: email,
-  //   })
-  //     .then(res => {
-  //       const access = res.data.access;
-  //       const name =  res.data.name;
-  //       console.log(res.data.access, 'ooo')
-  //       // Store access token in local storage or context
-  //       sessionStorage.setItem('accessToken', access);
-  //       sessionStorage.setItem('userName', name);
-  //       // Redirect to home page
-  //       navigate('/home');
-  //     })
-  //     .catch(error => {
-  //       // Display API error message
-  //       setApiError('Invalid email or password.');
-  //       console.log(error, 'error');
-  //     });
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     if (email.trim() === '') {
       setEmailError('Please enter your email.');
       return;
     }
-  
+
     if (password.trim() === '') {
       setPasswordError('Please enter your password.');
       return;
     }
-  
+
     // Sending the form data as JSON string
     axios.post('https://api-flrming.dhoomaworksbench.site/api/student/user-login/', {
       password: password,
@@ -98,7 +63,7 @@ function LoginPage() {
         console.log(error, 'error');
       });
   };
-  
+
 
   return (
     <div className="wrapper">

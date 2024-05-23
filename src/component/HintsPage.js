@@ -8,7 +8,7 @@ const HintsPage = () => {
     const navigate = useNavigate();
 
     const handleSubmit = () => {
-        navigate('/levels');
+        navigate('/home');
     };
 
     return (
@@ -17,6 +17,10 @@ const HintsPage = () => {
                 <div className="logo-section">
                     <div className="logo">
                         <img src={logo} alt="logo" />
+                    </div>
+                    <div className="home-level">
+                        <span>Home</span> |
+                        <span className="level-heading">Logout</span>
                     </div>
                 </div>
                 <div className="task-header">
@@ -35,7 +39,7 @@ const HintsPage = () => {
                             <li className="list-group-item">Hint 4: This is the fourth hint.</li>
                             <li className="list-group-item">Hint 5: This is the fifth hint.</li>
                         </ol>
-                        <button className="btn btn-primary mt-4" onClick={handleSubmit}>Back to Levels</button>
+                        <button className="btn btn-primary mt-4" onClick={handleSubmit}>Back to Home</button>
                     </div>
                 </div>
             </div>

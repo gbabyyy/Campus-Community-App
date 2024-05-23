@@ -387,7 +387,7 @@ function LevelsPage() {
                     </div>
                     <div className="home-level">
                         <span>Home</span> |
-                        <span className="level-heading">Tasks</span>
+                        <span className="level-heading">Logout</span>
                     </div>
                 </div>
                 <div className="task-header">

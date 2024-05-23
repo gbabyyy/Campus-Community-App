@@ -58,7 +58,7 @@ const GameListPage = () => {
                     </div>
                     <div className="home-level">
                         <span>Home</span> |
-                        <span className="level-heading">Task</span>
+                        <span className="level-heading">Logout</span>
                     </div>
                 </div>
             </div>
