@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import './componentStyles/LoginPage.css';
+import '../StyleComponent/LoginPage.css';
 import logo from '../assests/logo.png';
-import './componentStyles/RegisterPage.css';
+import '../StyleComponent/RegisterPage.css';
 import axios from 'axios';
+import base64 from 'base-64';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -39,19 +40,28 @@ function LoginPage() {
       return;
     }
 
-    // Sending the form data as JSON string
-    axios.post('https://api-flrming.dhoomaworksbench.site/api/student/user-login/', {
-      password: password,
+    // Encode the password using base64
+    const encodedPassword = base64.encode(password);
+
+    axios.post('http://127.0.0.1:8000/api/student/user-login/', {
+      password: encodedPassword,
       email: email,
     })
       .then(res => {
-        const { access, name, status } = res.data;
+        const { access, name, status, is_staff, collage_name, student_id } = res.data;
         if (status) {
-          // Store access token and name in session storage
+          // Store access token, name, and is_staff in session storage
           sessionStorage.setItem('accessToken', access);
           sessionStorage.setItem('userName', name);
-          // Redirect to home page
-          navigate('/home');
+          sessionStorage.setItem('isStaff', is_staff.toString()); // Store as string 'true' or 'false'
+          sessionStorage.setItem('campusName', collage_name);
+          sessionStorage.setItem('studentId', student_id);
+          // Redirect based on is_staff value
+          if (is_staff) {
+            navigate('/admin-home');
+          } else {
+            navigate('/home');
+          }
         } else {
           // Handle error when status is false
           setApiError('Invalid email or password.');
@@ -60,29 +70,37 @@ function LoginPage() {
       .catch(error => {
         // Display API error message
         setApiError('Invalid email or password.');
-        console.log(error, 'error');
       });
   };
-
 
   return (
     <div className="wrapper">
       <div className="background-image"></div>
       <div className="gradient"></div>
+
       <form onSubmit={handleSubmit} className="register-form">
+        <img src={logo} alt="logo" style={{ width: '50%', height: '20%', marginBottom: '20px' }} />
         <h2 style={{ color: 'white' }}>Login To Your Account</h2>
-        <img src={logo} alt="logo" style={{ width: '200px', height: 'auto', marginBottom: '30px' }} />
         <div className="form-group">
+          <span className='input-icon'>
+            {/* <MdEmail className='input-icon-svg'/> */}
+          </span>
           <input
             type="text"
             id="email"
-            placeholder='Email'
+            placeholder='Email ID'
             value={email}
             onChange={handleUsernameChange}
           />
-          {emailError && <p className="error-message">{emailError}</p>}
+          {/* {emailError && <p className="error-message">{emailError}</p>} */}
         </div>
         <div className="form-group">
+          <span className='input-icon'>
+            {/* <IoMdLock className='input-icon-svg'/> */}
+          </span>
+          <span className='input-show-password'>
+            {/* <AiFillEyeInvisible className='input-icon-svg'/> */}
+          </span>
           <input
             type="password"
             id="password"
@@ -90,16 +108,18 @@ function LoginPage() {
             value={password}
             onChange={handlePasswordChange}
           />
-          {passwordError && <p className="error-message">{passwordError}</p>}
+          {/* {passwordError && <p className="error-message">{passwordError}</p>} */}
         </div>
         <div style={{ marginBottom: '25px' }}> {/* Add some margin between buttons */}
-          <button className="btn btn-primary btn-lg" type="submit">Login</button>
+          <button className="btn btn-primary btn-lg" type="submit">
+            <p>Login</p>
+          </button>
         </div>
         <div className="additional-links mt-5">
-          <span className="mb-5" style={{ color: 'white' }}>Don't have an account? <a href="/register" style={{ textDecoration: 'underline', color: 'white' }}>Register</a></span> <br></br>
-          <a style={{ textDecoration: 'underline', color: 'white' }} href="/forgot-password">Forgotten Password?</a>
+          <span className="mb-1" style={{ color: 'white' }}>Don't have an account? <a href="/register" style={{ textDecoration: 'underline', color: 'white' }}><span className='link-reg-span'>Sign Up</span></a></span> <br></br>
+          <a style={{ textDecoration: 'underline', color: 'white' }} href="/forgot-pwd">Forgotten Password?</a>
         </div>
-        {apiError && <p className="error-message" style={{ color: 'white' }}>{apiError}</p>}
+        {apiError && <p className="error-message" style={{ color: 'red' }}>{apiError}</p>}
       </form>
     </div>
   );
